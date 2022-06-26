@@ -1,6 +1,8 @@
 const asyncHandler = require("express-async-handler");
 const bcrypt = require("bcryptjs");
 const User = require("../models/userModels");
+const jwtGenerator = require("../utils/jwtGenerator");
+
 // @desc Register a new user
 // @route /api/users
 // @access Public
@@ -32,7 +34,12 @@ const registerUser = asyncHandler(async (req, res) => {
   });
 
   if (user) {
-    res.status(201).json({ _id: user._id, name: user.name, email: user.email });
+    res.status(201).json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      token: jwtGenerator(user._id),
+    });
   } else {
     res.status(400);
     throw new Error("invalid user data");
@@ -43,7 +50,23 @@ const registerUser = asyncHandler(async (req, res) => {
 // @route /api/login
 // @access Public
 const loginUser = asyncHandler(async (req, res) => {
-  res.send("Login Route");
+  const { email, password } = req.body;
+
+  //find the user via email
+  const user = await User.findOne({ email });
+
+  //Check user and password match with bcrypt
+  if (user && (await bcrypt.compare(password, user.password))) {
+    res.status(200).json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      token: jwtGenerator(user._id),
+    });
+  } else {
+    res.status(401);
+    throw new Error("Invalid credentials");
+  }
 });
 
 module.exports = {
