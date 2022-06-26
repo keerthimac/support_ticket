@@ -1,4 +1,4 @@
-const asyncHandler = require("express-async-handler");
+const asyncHandler = require("express-async-handler"); // for better error handling
 const bcrypt = require("bcryptjs");
 const User = require("../models/userModels");
 const jwtGenerator = require("../utils/jwtGenerator");
