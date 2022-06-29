@@ -7,11 +7,12 @@ const initialState = {
   isSuccess: false,
   isLoading: false,
   message: "",
-};
+}; // State
 
 export const register = createAsyncThunk(
   "auth/register",
   async (user, thunkAPI) => {
+    //'user is data coming from component, ThunkAPI for
     try {
       return await authService.register(user);
     } catch (error) {
@@ -22,7 +23,7 @@ export const register = createAsyncThunk(
         error.message ||
         error.toString();
 
-      return thunkAPI.rejectWithValue(message);
+      return thunkAPI.rejectWithValue(message); // for error handling
     }
   }
 );
@@ -43,6 +44,7 @@ export const authSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
+    //extraReducers use for bind action between tasks such as pending,fulfilled,rejected'
     builder
       .addCase(register.pending, (state) => {
         state.isLoading = true;
@@ -55,7 +57,7 @@ export const authSlice = createSlice({
       .addCase(register.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
-        state.message = action.payload;
+        state.message = action.payload; //this message exporting from  "return thunkAPI.rejectWithValue(message);" in register function
         state.user = null;
       });
   },

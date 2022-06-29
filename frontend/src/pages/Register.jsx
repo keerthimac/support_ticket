@@ -15,10 +15,10 @@ function Register() {
 
   const { name, email, password, confirmPassword } = formData;
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const dispatch = useDispatch(); //Initiate useDispatch Hook
+  const navigate = useNavigate(); //Initiate useNavigate Hook 
 
-  const { user, isLoading, isError, isSuccess, message } = useSelector(
+  const { user, isLoading, isError, isSuccess, message } = useSelector( //This is initial state from authSlice.js
     (state) => state.auth
   );
 
@@ -29,7 +29,7 @@ function Register() {
     if (isSuccess || user) {
       navigate("/");
     }
-    dispatch(reset());
+    dispatch(reset()); // Dispatch use for bring functions from auth slice
   }, [isError, isSuccess, message, user, navigate, dispatch]);
 
   const onChange = (e) =>
@@ -45,7 +45,7 @@ function Register() {
         email,
         password,
       };
-      dispatch(register(userData));
+      dispatch(register(userData)); // Dispatch use for bring functions from auth slice
     }
   };
 
