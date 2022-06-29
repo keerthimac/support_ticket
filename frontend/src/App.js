@@ -5,6 +5,8 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Header from "./components/Header";
+import NewTicket from "./pages/NewTicket";
+import PrivateRoutes from "./components/PrivateRoutes";
 
 function App() {
   return (
@@ -16,6 +18,9 @@ function App() {
             <Route path='/' element={<Home />} />
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
+            <Route path='/new-Ticket' element={<PrivateRoutes />}>
+              <Route path='/new-Ticket' element={<NewTicket />} />
+            </Route>
           </Routes>
         </div>
       </Router>
