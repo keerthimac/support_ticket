@@ -1,6 +1,6 @@
 const asyncHandler = require("express-async-handler"); // for better error handling
 const bcrypt = require("bcryptjs");
-const User = require("../models/userModels");
+const User = require("../models/userModel");
 const jwtGenerator = require("../utils/jwtGenerator");
 
 // @desc Register a new user
@@ -74,7 +74,7 @@ const loginUser = asyncHandler(async (req, res) => {
 // @access Private
 const getMe = asyncHandler(async (req, res) => {
   const user = {
-    id: req.user._id,
+    id: req.user.id,
     email: req.user.email,
     name: req.user.name,
   };

@@ -1,7 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv").config();
-const User = require("../models/userModels");
+const User = require("../models/userModel");
 
 const protect = asyncHandler(async (req, res, next) => {
   //01 Initialize variable for token
@@ -17,7 +17,7 @@ const protect = asyncHandler(async (req, res, next) => {
       //04 Verify Token
       const verified = jwt.verify(token, process.env.JWT_SECRET);
       //05 Get user from token via server
-      req.user = await User.findById(verified.user_id).select("-password");
+      req.user = await User.findById(verified.id).select("-password");
       //06 next function
       next();
     } catch (error) {
