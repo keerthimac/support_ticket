@@ -17,9 +17,10 @@ function Register() {
   const { name, email, password, confirmPassword } = formData;
 
   const dispatch = useDispatch(); //Initiate useDispatch Hook
-  const navigate = useNavigate(); //Initiate useNavigate Hook 
+  const navigate = useNavigate(); //Initiate useNavigate Hook
 
-  const { user, isLoading, isError, isSuccess, message } = useSelector( //This is initial state from authSlice.js
+  const { user, isLoading, isError, isSuccess, message } = useSelector(
+    //This is initial state from authSlice.js
     (state) => state.auth
   );
 
