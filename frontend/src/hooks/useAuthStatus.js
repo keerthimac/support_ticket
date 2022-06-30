@@ -6,7 +6,7 @@ export const useAuthStatus = () => {
   const [checkingStatus, setCheckingStatus] = useState(true);
 
   const { user } = useSelector((state) => state.auth);
-  console.log(user);
+  // console.log(user);
 
   useEffect(() => {
     if (user) {
